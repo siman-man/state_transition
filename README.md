@@ -1,7 +1,6 @@
 # StateTransition
 
-Ruby state-machine
-https://github.com/jakesgordon/javascript-state-machine/blob/master/state-machine.js
+https://github.com/jakesgordon/javascript-state-machine
 これを見て便利そうだったのでRuby verを作ってみました。
 
 ## Installation
