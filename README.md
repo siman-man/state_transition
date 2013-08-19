@@ -1,6 +1,6 @@
 # StateTransition
 
-TODO: Write a gem description
+Ruby state-machine
 
 ## Installation
 
@@ -18,7 +18,8 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+require 'state'
+
 
 ## Contributing
 

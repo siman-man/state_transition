@@ -1,14 +1,22 @@
 require 'spec_helper'
 
 describe StateTransition do
+
   it 'should have a version number' do
     StateTransition::VERSION.should_not be_nil
+  end
+
+  describe "no initialize" do
+    it "should be error occured." do
+      lambda{ state = StateTransition::StateMachine.new() }.should raise_error(StandardError)
+      lambda{ @state.three }.should raise_error(StandardError)
+    end
   end
 
   describe "init state" do
     before :all do
       @sequence = []
-      @state = StateTransition::StateTransition.new({
+      @state = StateTransition::StateMachine.new({
         initial: :first,
 
         actions: [

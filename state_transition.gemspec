@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = StateTransition::VERSION
   spec.authors       = ["siman-man"]
   spec.email         = ["k128585@ie.u-ryukyu.ac.jp"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{This is ruby state_machine.}
+  spec.summary       = %q{This is ruby state_machine.}
   spec.homepage      = ""
   spec.license       = "MIT"
 

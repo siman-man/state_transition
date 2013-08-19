@@ -1,17 +1,22 @@
 require "state_transition/version"
 
 module StateTransition
-  class StateTransition
+  class StateMachine
     attr_reader :current
     attr_accessor :state_list
 
-    def initialize(data)
+    def initialize(data = nil)
       @state_list = []
       @state_graph = Hash.new{|hash, key| hash[key] = []}
       @callbacks = {}
       @sequence = 3
 
-      @current = data[:initial]
+      begin
+        @current = data[:initial] 
+      rescue 
+        raise StandardError, "StateMachine: Not define first state."
+      end
+
       set_state(data[:initial])
 
       create_move_action(data[:actions])
@@ -22,7 +27,7 @@ module StateTransition
       @state_list.include?(state)
     end
 
-    def create_move_action(actions)
+    def create_move_action(actions = [])
       actions.each do |action|
         name = action[:name]
         from = action[:from]
@@ -32,7 +37,7 @@ module StateTransition
         set_state(to)
         create_edge(from, to)
 
-        StateTransition.class_eval do
+        StateMachine.class_eval do
           define_method name do
             if can_move?(to)
               before_func = ("before_" + to.to_s).to_sym
@@ -50,7 +55,7 @@ module StateTransition
       end
     end
 
-    def create_callbacks(callbacks)
+    def create_callbacks(callbacks = [])
       callbacks.each do |name, function|
         @callbacks[name] = function
       end
