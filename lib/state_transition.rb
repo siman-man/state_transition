@@ -19,15 +19,15 @@ module StateTransition
 
       set_state(data[:initial])
 
-      create_move_action(data[:actions])
-      create_callbacks(data[:callbacks])
+      create_move_action(data[:actions] || [])
+      create_callbacks(data[:callbacks] || [])
     end
 
     def have_state?(state)
       @state_list.include?(state)
     end
 
-    def create_move_action(actions = [])
+    def create_move_action(actions)
       actions.each do |action|
         name = action[:name]
         from = action[:from]
@@ -55,7 +55,7 @@ module StateTransition
       end
     end
 
-    def create_callbacks(callbacks = [])
+    def create_callbacks(callbacks)
       callbacks.each do |name, function|
         @callbacks[name] = function
       end
