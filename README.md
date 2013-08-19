@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-require 'state'
+require 'state_transition'
 
 
 ## Contributing
