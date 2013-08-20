@@ -6,7 +6,7 @@ state = StateTransition::StateMachine.new({
   actions: [
     { name: "move_first", from: [ :second, :third ], to: :first },
     { name: "move_second", from: [ :first, :third ], to: :second },
-    { name: "move_third", from: [ :first, :second ], to: :third },
+    { name: "move_third", from: :second, to: :third },
   ],
 
   callbacks: {
@@ -15,8 +15,10 @@ state = StateTransition::StateMachine.new({
   }
 })
 
-puts state.current
+puts state.current            #=> :first
+puts state.can_move?(:second) #=> true
+puts state.can_move?(:third)  #=> false
 
-state.move_second
+state.move_second           
 
-puts state.current
+puts state.current            #=> :second
