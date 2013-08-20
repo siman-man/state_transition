@@ -9,7 +9,6 @@ module StateTransition
       @state_list = []
       @state_graph = Hash.new{|hash, key| hash[key] = []}
       @callbacks = {}
-      @sequence = 3
 
       begin
         @current = data[:initial] 
