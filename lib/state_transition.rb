@@ -2,13 +2,14 @@ require "state_transition/version"
 
 module StateTransition
   class StateMachine
-    attr_reader :current
+    attr_reader :current, :define_actions
     attr_accessor :state_list
 
     def initialize(data = nil)
       @state_list = []
       @state_graph = Hash.new{|hash, key| hash[key] = []}
       @callbacks = {}
+      @define_actions = []
 
       begin
         @current = data[:initial] 
@@ -23,14 +24,20 @@ module StateTransition
     end
 
     def have_state?(state)
-      @state_list.include?(state)
+      @state_list.include?(state.to_sym)
+    end
+
+    def add_action(action)
+      create_move_action([action])
     end
 
     def create_move_action(actions)
       actions.each do |action|
-        name = action[:name]
+        name = action[:name].to_sym
         from = action[:from]
-          to = action[:to]
+          to = action[:to].to_sym
+
+        @define_actions << name.to_sym
 
         set_state(from)
         set_state(to)
@@ -41,9 +48,8 @@ module StateTransition
             if can_move?(to)
               before_func = ("before_" + to.to_s).to_sym
               after_func  = ("after_" + to.to_s).to_sym
-              if @callbacks[before_func] 
-                @callbacks[before_func].call
-              end
+              
+              @callbacks[before_func].call if @callbacks[before_func] 
               @current = to
               @callbacks[after_func].call if @callbacks[after_func]
             else
@@ -65,12 +71,13 @@ module StateTransition
     end
 
     def set_state(state)
-      @state_list.push state unless have_state?(state) || !state.kind_of?(Symbol)
+      @state_list.push state.to_sym unless !state.respond_to?(:to_sym) || have_state?(state)
     end
 
     def create_edge(from, to)
       if from.kind_of?(Array) 
         from.each do |state|
+          state = state.to_sym
           @state_graph[state].push to unless @state_graph[state].include?(to)
         end
       else

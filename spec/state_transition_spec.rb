@@ -41,6 +41,29 @@ describe StateTransition do
       @state.have_state?(:third).should be_true
     end
 
+    it "should @state have three('first', 'second', 'third') state" do
+      @state.have_state?('first').should be_true
+      @state.have_state?('second').should be_true
+      @state.have_state?('third').should be_true
+    end
+
+    it "should @state have three method" do
+      @state.respond_to?(:two)
+      @state.respond_to?(:three)
+      @state.respond_to?(:reset)
+    end
+
+    it "should show defined actions" do
+      @state.define_actions.should == [:two, :three, :reset]
+    end
+
+    it "add action test" do
+      @state.add_action(name: 'test', from: 'hoge', to: 'piyo')
+      @state.have_state?(:hoge).should be_true
+      @state.have_state?(:piyo).should be_true
+      @state.respond_to?(:test)
+    end
+
     it "should first state is :first" do
       @state.current.should == :first
     end
