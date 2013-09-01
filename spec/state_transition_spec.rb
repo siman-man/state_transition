@@ -12,8 +12,8 @@ describe StateTransition do
     end
   end
 
-  describe "init state" do
-    before :all do
+  describe "state machine" do
+    before :each do
       @sequence = []
       @state = StateTransition::StateMachine.new({
         initial: :first,
@@ -108,6 +108,16 @@ describe StateTransition do
 
       it "should be raised error invalid action" do
         lambda{ @state.three }.should raise_error(StandardError)
+      end
+    end
+
+    describe "about duplicated" do
+      it "should not influence state change" do
+        @copy = @state.dup
+        @state.add_action(name: 'test', from: 'hoge', to: 'piyo')
+
+        @copy.have_state?(:hoge).should be_false
+        @copy.have_state?(:piyo).should be_false
       end
     end
   end

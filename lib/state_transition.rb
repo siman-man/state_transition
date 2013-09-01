@@ -23,6 +23,13 @@ module StateTransition
       create_callbacks(data[:callbacks] || [])
     end
 
+    def initialize_copy(org)
+      @callbacks = @callbacks.dup
+      @state_list = @state_list.dup
+      @state_graph = @state_graph.dup
+      @define_actions = @define_actions.dup
+    end
+
     def have_state?(state)
       @state_list.include?(state.to_sym)
     end
