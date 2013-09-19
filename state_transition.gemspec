@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["k128585@ie.u-ryukyu.ac.jp"]
   spec.description   = %q{This is ruby state_machine.}
   spec.summary       = %q{This is ruby state_machine.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/siman-man/state_transition"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
