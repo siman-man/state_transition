@@ -3,9 +3,7 @@ require "state_transition/deep_copy"
 
 module StateTransition
   class StateMachine
-    if RUBY_VERSION >= "2.1.0"
-      using DeepCopy
-    end
+    using DeepCopy
 
     attr_reader :current, :define_actions
 
