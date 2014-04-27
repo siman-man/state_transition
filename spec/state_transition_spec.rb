@@ -58,7 +58,7 @@ describe StateTransition do
     end
 
     it "add action test" do
-      @state.add_action(name: 'test', from: 'hoge', to: 'piyo')
+      @state.add_move_action(name: 'test', from: 'hoge', to: 'piyo')
       @state.have_state?(:hoge).should be_true
       @state.have_state?(:piyo).should be_true
       @state.respond_to?(:test)
@@ -114,7 +114,7 @@ describe StateTransition do
     describe "about duplicated" do
       it "should not influence state change" do
         @copy = @state.dup
-        @state.add_action(name: 'test', from: 'hoge', to: 'piyo')
+        @state.add_move_action(name: 'test', from: 'hoge', to: 'piyo')
 
         @copy.have_state?(:hoge).should be_false
         @copy.have_state?(:piyo).should be_false
