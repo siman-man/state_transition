@@ -29,7 +29,7 @@ describe StateTransition do
           before_second: -> { @sequence << "before_second" },
           before_third: -> { @sequence << "before_third" },
           after_first: -> { @sequence << "after_first" },
-          after_second: -> { @sequence << "after_second"; puts "Hello World!" },
+          after_second: -> { @sequence << "after_second" },
           after_third: -> { @sequence << "after_third" },
         }
       })

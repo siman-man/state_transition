@@ -1,7 +1,12 @@
 require "state_transition/version"
+require "state_transition/deep_copy"
 
 module StateTransition
   class StateMachine
+    if RUBY_VERSION >= "2.1.0"
+      using DeepCopy
+    end
+
     attr_reader :current, :define_actions
     attr_accessor :state_list
 
