@@ -1,7 +1,9 @@
 # StateTransition
 
 https://github.com/jakesgordon/javascript-state-machine
-これが便利だったのでRuby verを作ってみた。
+This program is very useful. so I created ruby ver.
+
+version 0.1.0 is active only upper 2.1.0.
 
 ## Installation
 
