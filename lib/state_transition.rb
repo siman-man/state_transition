@@ -18,7 +18,7 @@ module StateTransition
         raise StandardError, "StateMachine: Not define first state."
       end
 
-      @current = data[:initial]
+      @current = data[:initial].to_sym
 
       create_move_action(data[:actions] || [])
       create_callbacks(data[:callbacks] || [])

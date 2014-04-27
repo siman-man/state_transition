@@ -39,6 +39,7 @@ end
 
 h = HelloWorld.new
 
+p h.state.current
 h.state.one
 h.state.two
 h.state.three

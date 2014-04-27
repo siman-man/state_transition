@@ -22,5 +22,5 @@ p hoge.can_move?(:piyo)
 p state.define_actions
 p hoge.define_actions
 
-state.add_action(name: :world, from: :world, to: :hello)
+state.add_move_action(name: :world, from: :world, to: :hello)
 p state.define_actions
